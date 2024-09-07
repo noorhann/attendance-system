@@ -25,6 +25,7 @@ Route::group(["prefix" => "user", 'as' => 'user.'], function () {
     Route::group(['middleware' => ['auth:api']], function () {
         Route::post('/checkIn', [AttendanceController::class, "checkIn"])->name('checkIn');
         Route::post('/checkOut', [AttendanceController::class, "checkOut"])->name('checkOut');
+        Route::get('/getTotalHours', [AttendanceController::class, "getTotalHours"])->name('getTotalHours');
 
     });
 });

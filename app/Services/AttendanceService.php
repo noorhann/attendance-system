@@ -75,5 +75,43 @@ class AttendanceService
         );
     }
 
+    /**
+     * Calculate the total number of hours worked by the authenticated user
+     * within a specified date range.
+     *
+     * @param string $startDate The start date of the range in 'Y-m-d' format.
+     * @param string $endDate The end date of the range in 'Y-m-d' format.
+     * @return float The total number of hours worked.
+     */
+    public function getTotalHoursWorked($startDate, $endDate)
+    {
+        $user = Auth::user();
+
+        $startDate = Carbon::parse($startDate)->startOfDay();
+        $endDate = Carbon::parse($endDate)->endOfDay();
+
+        $attendances = Attendance::where('user_id', $user->id)
+            ->whereBetween('check_in', [$startDate, $endDate])
+            ->whereNotNull('check_out')
+            ->get();
+
+        $totalHours = 0;
+        $totalMinutes = 0;
+
+        $attendances->each(function ($attendance) use (&$totalHours, &$totalMinutes) {
+            if (is_array($attendance->hours_worked) && isset($attendance->hours_worked['hours'], $attendance->hours_worked['minutes'])) {
+                $totalHours += $attendance->hours_worked['hours'];
+                $totalMinutes += $attendance->hours_worked['minutes'];
+            }
+        });
+
+        $totalHours += floor($totalMinutes / 60);
+        $totalMinutes = $totalMinutes % 60;
+
+        return [
+            'totalHours' => $totalHours,
+            'totalMinutes' => $totalMinutes 
+        ];
+    }
 
 }

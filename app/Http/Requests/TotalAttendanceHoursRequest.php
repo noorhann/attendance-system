@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Requests;
-
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\ValidationException;
-class LoginRequest extends FormRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class TotalAttendanceHoursRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'identity_number' => 'required|string',
-            'password' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
         ];
     }
 
