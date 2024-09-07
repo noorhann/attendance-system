@@ -1,0 +1,42 @@
+services: 
+  app: 
+    build: 
+      context: . 
+      dockerfile: Dockerfile 
+    image: my-laravel-app 
+    container_name: laravel_app 
+    volumes: 
+      - ./:/var/www 
+    ports: 
+      - "9000:80" 
+    networks: 
+      - laravel_network 
+ 
+  db: 
+    image: mysql:5.7 
+    container_name: laravel_db 
+    restart: always 
+    environment: 
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_DATABASE: attendance
+    volumes: 
+      - db_data:/var/lib/mysql 
+    networks: 
+      - laravel_network 
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: db  # The service name of your MySQL container
+      MYSQL_ROOT_PASSWORD: '' # Set if you have a password for root
+    ports:
+      - "8080:80"
+    networks:
+      - laravel_network
+
+networks: 
+  laravel_network: 
+ 
+volumes: 
+  db_data:      
