@@ -51,4 +51,13 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=no-reply@example.com
 MAIL_FROM_NAME="${APP_NAME}"
 ```
+## API Endpoints
+
+| Method | Endpoint            | Description                             |
+|--------|---------------------|-----------------------------------------|
+| POST   | `/api/user/login`         | User login                              |
+| POST   | `/api/user/checkIn`      | Check-in the user                       |
+| POST   | `/api/user/checkOut`     | Check-out the user                      |
+| GET    | `/api/user/getTotalHours`    | Get the user's total hours between two given dates          |
+
 
