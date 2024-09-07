@@ -56,6 +56,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 | Method | Endpoint            | Description                             |
 |--------|---------------------|-----------------------------------------|
 | POST   | `/api/user/login`         | User login                              |
+| POST   | `/api/user/register`         | User Register                              |
 | POST   | `/api/user/checkIn`      | Check-in the user                       |
 | POST   | `/api/user/checkOut`     | Check-out the user                      |
 | GET    | `/api/user/getTotalHours`    | Get the user's total hours between two given dates          |
