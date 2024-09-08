@@ -61,4 +61,6 @@ MAIL_FROM_NAME="${APP_NAME}"
 | POST   | `/api/user/checkOut`     | Check-out the user                      |
 | GET    | `/api/user/getTotalHours`    | Get the user's total hours between two given dates          |
 
+## Postman Collection 
+[Click here to download the Postman collection](https://drive.google.com/file/d/1lsR9t3mFDay70IaOxPLfOpcHhL8spZw4/view?usp=sharing)
 
